@@ -12,3 +12,9 @@ vex::motor_group BaseRight = vex::motor_group(Motor2, Motor3);
 vex::drivetrain Base = vex::drivetrain(BaseLeft, BaseRight);
 
 vex::motor Roller = vex::motor(vex::PORT11, vex::ratio36_1, false);
+
+vex::motor LiftLeft = vex::motor(vex::PORT10, vex::ratio36_1, false);
+vex::motor LiftRight = vex::motor(vex::PORT20, vex::ratio36_1, true);
+vex::motor_group Lift = vex::motor_group(LiftLeft, LiftRight);
+
+vex::motor Intake = vex::motor(vex::PORT13, vex::ratio18_1, false);

@@ -29,6 +29,11 @@ const float BASE_SCALE = 1.0;
 /// powered on.
 /// @return void must be returned for the other tasks to start
 void pre_auton(void) {
+  Lift.setVelocity(100.0, percent);
+  Lift.setMaxTorque(100.0, percent);
+
+  Intake.setVelocity(100.0, percent);
+  Intake.setMaxTorque(100.0, percent);
   // All activities that occur before the competition starts
   // Example: clearing encoders, setting servo positions, ...
   Roller.setBrake(vex::brakeType::brake);
@@ -58,6 +63,24 @@ void rollRoller(void) {
     Roller.spin(forward, 100.0, percent);
   } else {
     Roller.stop();
+  }
+}
+
+void rollLift(void) {
+  if (Controller.ButtonL2.pressing()) {
+    Lift.spin(forward, 100.0, percent);
+  } else {
+    Lift.stop();
+  }
+}
+
+void rollIntake(void) {
+  if (Controller.ButtonR1.pressing()) {
+    Intake.spin(forward, 100.0, percent);
+  } else if (Controller.ButtonR2.pressing()) {
+    Intake.spin(reverse, 100.0, percent);
+  } else {
+    Intake.stop();
   }
 }
 
@@ -94,6 +117,8 @@ void usercontrol(void) {
                    percent);
 
     rollRoller();
+    rollLift();
+    rollIntake();
 
     wait(20, msec); // prevent wasted resources.
   }
